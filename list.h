@@ -19,6 +19,7 @@ private:
         link *first, *last;
 public:
         Double_Linked_List() : first(nullptr), last(nullptr) {}
+        ~Double_Linked_List();
         void Add_begin(datatype &value);
         void Add_end(datatype &value);
         void Del_begin();
@@ -26,6 +27,7 @@ public:
         void Add_mid(datatype &key, datatype &value);
         void Del_mid(datatype &key);
         link *Search(datatype &key);
+        datatype operator [] (int index);
         void Show();
 };
 
@@ -142,6 +144,19 @@ void Double_Linked_List::Del_mid(datatype &key)
     else cout << "Елемент не знайдено. Видалення не відбулось!" << endl;
 }
 
+datatype Double_Linked_List::operator [](int index)
+{
+     link *buffer = first;
+     link *temp = buffer;
+
+    for(int i=0; i<index; i++)
+    {
+        buffer = temp->next;
+        temp = buffer;
+    }
+
+    return (temp->data);
+}
 
 void Double_Linked_List::Show()
 {
@@ -152,6 +167,16 @@ void Double_Linked_List::Show()
     {
         cout << "|| " << current->data << " ||" << endl;
         current = current->next;
+    }
+}
+
+Double_Linked_List::~Double_Linked_List()
+{
+    while(first)
+    {
+        link *temp = first->next;
+        delete first;
+        first = temp;
     }
 }
 

@@ -53,11 +53,11 @@ int main()
                   list.Del_mid(key);
                   break;
                 }
-//        case 9: { int index;
-//                  cout << "Введіть індекс: "; cin >> index;
-//                  cout << list[index] << endl;
-//                  break;
-//                }
+        case 9: { int index;
+                  cout << "Введіть індекс: "; cin >> index;
+                  cout << list[index] << endl;
+                  break;
+                }
         case 10: { exit(0);
                   break;
                 }
