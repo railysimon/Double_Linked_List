@@ -66,7 +66,7 @@ void Double_Linked_List::Del_begin()
     }
     else
     {
-        cout << "Черга порожня!" << endl;
+        cout << "Список порожній!" << endl;
         exit(0);
     }
 
@@ -85,7 +85,7 @@ void Double_Linked_List::Del_end()
     }
     else
     {
-        cout << "Черга порожня!" << endl;
+        cout << "Список порожній!" << endl;
         exit(0);
     }
 }
