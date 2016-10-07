@@ -27,7 +27,9 @@ public:
         void Add_mid(datatype &key, datatype &value);
         void Del_mid(datatype &key);
         link *Search(datatype &key);
-        datatype operator [] (int index);
+        link *operator [] (int index);
+        void PushinMid(int &index, datatype &value);
+        void PopinMid(int &index);
         void Show();
 };
 
@@ -144,7 +146,7 @@ void Double_Linked_List::Del_mid(datatype &key)
     else cout << "Елемент не знайдено. Видалення не відбулось!" << endl;
 }
 
-datatype Double_Linked_List::operator [](int index)
+link *Double_Linked_List::operator [](int index)
 {
      link *buffer = first;
      link *temp = buffer;
@@ -155,7 +157,7 @@ datatype Double_Linked_List::operator [](int index)
         temp = buffer;
     }
 
-    return (temp->data);
+    return temp;
 }
 
 void Double_Linked_List::Show()
@@ -177,6 +179,62 @@ Double_Linked_List::~Double_Linked_List()
         link *temp = first->next;
         delete first;
         first = temp;
+    }
+}
+
+void Double_Linked_List::PushinMid(int &index, datatype &value)
+{
+    link *buffer = first;
+    link *temp = buffer;
+
+   for(int i=0; i<index; i++)
+   {
+       buffer = temp->next;
+       temp = buffer;
+   }
+
+    link *pkey = (temp->previous);
+    if(pkey)
+    {
+        if(!(pkey->next)) this->Add_end(value);
+        else
+        {
+            link *newlink = new link;
+            newlink->data = value;
+            newlink->next = pkey->next;
+            newlink->previous = pkey;
+            pkey->next = newlink;
+            (newlink->next)->previous = newlink;
+            cout << "Елемент вставлено!" << endl;
+        }
+    }
+
+}
+
+void Double_Linked_List::PopinMid(int &index)
+{
+    link *buffer = first;
+    link *temp = buffer;
+
+   for(int i=0; i<index; i++)
+   {
+       buffer = temp->next;
+       temp = buffer;
+   }
+
+    link *pkey = temp;
+
+    if(pkey)
+    {
+        if((pkey->next) && !(pkey->previous)) this->Del_begin();
+        else if(!(pkey->next) && (pkey->previous)) this->Del_end();
+        else
+        {
+            (pkey->previous)->next = pkey->next;
+            (pkey->next)->previous = pkey->previous;
+            delete pkey;
+        }
+        cout << "Елемент видалено!" << endl;
     }
 }
 
